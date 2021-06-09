@@ -44,7 +44,7 @@ class FinishedAnime(Resource):
     @staticmethod
     def post():
         """
-            Create a anime viewed
+            Create an anime viewed
             ---
             tags:
               - anime_viewed
@@ -84,21 +84,21 @@ class FinishedAnime(Resource):
 
 class FinishedAnimeId(Resource):
     @staticmethod
-    def get(finished_anime_id):
+    def get(anime_viewed_id):
         """
-            Retrieve a finished anime
+            Retrieve an anime viewed
             ---
             tags:
               - anime_viewed
             parameters:
               - in: path
-                name: finished_anime_id
+                name: anime_viewed_id
                 required: true
                 type: integer
                 description: The ID of the finished anime to return.
             responses:
                 200:
-                  description: A FinishedAnime object.
+                  description: An AnimeViewed object.
                   schema:
                     type: object
                     example: {
@@ -107,22 +107,22 @@ class FinishedAnimeId(Resource):
                       "is_published": boolean
                     }
                 400:
-                  description: The specified finished anime ID is invalid. Is not a number.
+                  description: The specified anime viewed ID is invalid. Is not a number.
                 404:
-                  description: An finished anime with the ID {finished_anime_id} was not found.
+                  description: The anime viewed with the ID {anime_viewed_id} was not found.
         """
-        if isinstance(finished_anime_id, int):
-            anime_viewed = AnimeViewed.query.filter_by(id=finished_anime_id).first()
+        if isinstance(anime_viewed_id, int):
+            anime_viewed = AnimeViewed.query.filter_by(id=anime_viewed_id).first()
 
             if not anime_viewed:
-                abort(Response(f'An anime viewed with the ID {finished_anime_id} was not found.', 404))
+                abort(Response(f'An anime viewed with the ID {anime_viewed_id} was not found.', 404))
 
             return make_response(jsonify(anime_viewed.to_dict()), 200)
         else:
             abort(Response(f'The specified anime viewed ID is invalid. Is not a number.', 400))
 
     @staticmethod
-    def put(finished_anime_id):
+    def put(anime_viewed_id):
         """
             Updates a anime viewed
             ---
@@ -130,7 +130,7 @@ class FinishedAnimeId(Resource):
               - anime_viewed
             parameters:
               - in: path
-                name: finished_anime_id
+                name: anime_viewed_id
                 required: true
                 type: integer
                 description: The ID of the anime viewed to update
@@ -162,17 +162,17 @@ class FinishedAnimeId(Resource):
                 400:
                   description: The specified anime viewed ID is invalid. Is not a number.
                 404:
-                  description: An anime viewed with the ID {finished_anime_id} was not found.
+                  description: An anime viewed with the ID {anime_viewed_id} was not found.
         """
         parser.add_argument('is_published', required=False)
 
         anime_viewed = None
 
-        if isinstance(finished_anime_id, int):
-            anime_viewed = AnimeViewed.query.filter_by(id=finished_anime_id).first()
+        if isinstance(anime_viewed_id, int):
+            anime_viewed = AnimeViewed.query.filter_by(id=anime_viewed_id).first()
 
             if not anime_viewed:
-                abort(Response(f'An anime viewed with the ID {finished_anime_id} was not found.', 404))
+                abort(Response(f'An anime viewed with the ID {anime_viewed_id} was not found.', 404))
         else:
             abort(Response(f'The specified anime viewed ID is invalid. Is not a number.', 400))
 
@@ -186,15 +186,15 @@ class FinishedAnimeId(Resource):
         return make_response(jsonify(anime_viewed.to_dict()), 200)
 
     @staticmethod
-    def delete(finished_anime_id):
+    def delete(anime_viewed_id):
         """
-            Delete a anime viewed
+            Delete an anime viewed
             ---
             tags:
               - anime_viewed
             parameters:
               - in: path
-                name: finished_anime_id
+                name: anime_viewed_id
                 required: true
                 type: integer
                 description: The ID of the anime viewed to delete.
@@ -207,13 +207,13 @@ class FinishedAnimeId(Resource):
                 400:
                   description: The specified anime viewed ID is invalid. Is not a number.
                 404:
-                  description: An anime viewed with the ID {finished_anime_id} was not found.
+                  description: The anime viewed with the ID {finished_anime_id} was not found.
         """
-        if isinstance(finished_anime_id, int):
-            anime_viewed = AnimeViewed.query.filter_by(id=finished_anime_id).first()
+        if isinstance(anime_viewed_id, int):
+            anime_viewed = AnimeViewed.query.filter_by(id=anime_viewed_id).first()
 
             if not anime_viewed:
-                abort(Response(f'An anime viewed with the ID {finished_anime_id} was not found.', 404))
+                abort(Response(f'The anime viewed with the ID {anime_viewed_id} was not found.', 404))
 
             anime_viewed.delete()
 
