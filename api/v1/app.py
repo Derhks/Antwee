@@ -14,7 +14,7 @@ from api.v1.views.animes import Animes, AnimeId
 
 
 api.add_resource(FinishedAnime, '/finished-anime/')
-api.add_resource(FinishedAnimeId, '/finished-anime/<int:finished_anime_id>')
+api.add_resource(FinishedAnimeId, '/finished-anime/<int:anime_viewed_id>')
 api.add_resource(Animes, '/animes/')
 api.add_resource(AnimeId, '/animes/<int:anime_id>')
 # End of endpoint initialization
