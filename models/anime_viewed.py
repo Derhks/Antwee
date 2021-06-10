@@ -8,7 +8,8 @@ class AnimeViewed(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, unique=True, nullable=False)
     finished_at = db.Column(db.DateTime, nullable=False)
-    is_published = db.Column(db.Boolean)
+    is_published = db.Column(db.Boolean, nullable=False)
+    anime = db.relationship('Anime', lazy=True, uselist=False)
 
     def __init__(self, anime_name: str):
         self.name = anime_name

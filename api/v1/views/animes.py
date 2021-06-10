@@ -28,6 +28,12 @@ parser.add_argument(
     required=True,
     help="image cannot be blank!"
 )
+parser.add_argument(
+    'anime_viewed_id',
+    type=int,
+    required=True,
+    help="anime_viewed_id cannot be blank!"
+)
 
 
 class Animes(Resource):
@@ -77,6 +83,7 @@ class Animes(Resource):
                     - synopsis
                     - rating
                     - image
+                    - anime_viewed_id
                   properties:
                     canonical_title:
                       type: string
@@ -90,6 +97,9 @@ class Animes(Resource):
                     image:
                       type: string
                       description: image link
+                    anime_viewed_id:
+                      type: integer
+                      description: viewed anime id
             responses:
               201:
                 description: Anime created
@@ -110,7 +120,8 @@ class Animes(Resource):
             canonical_title=data['canonical_title'],
             synopsis=data['synopsis'],
             rating=data['rating'],
-            image=data['image']
+            image=data['image'],
+            anime_viewed_id=data['anime_viewed_id']
         )
         new_anime.save()
 
@@ -180,6 +191,7 @@ class AnimeId(Resource):
                     - synopsis
                     - rating
                     - image
+                    - anime_viewed_id
                   properties:
                     canonical_title:
                       type: string
@@ -193,6 +205,9 @@ class AnimeId(Resource):
                     image:
                       type: string
                       description: image link
+                    anime_viewed_id:
+                      type: integer
+                      description: viewed anime id
             responses:
                 200:
                   description: An Anime object updated.
@@ -225,6 +240,7 @@ class AnimeId(Resource):
         anime.synopsis = data['synopsis']
         anime.rating = data['rating']
         anime.image = data['image']
+        anime.anime_viewed_id = data['anime_viewed_id']
 
         anime.save()
 
