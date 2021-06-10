@@ -1,7 +1,9 @@
 from flask import abort, jsonify, make_response, Response
 from flask_restful import reqparse, Resource
+
+from models.anime import Anime
 from models.anime_viewed import AnimeViewed
-from utils.finished_anime_utils import check_boolean_string
+from utils.finished_anime_utils import check_boolean_string, RequestInfoAnime
 
 
 parser = reqparse.RequestParser()
@@ -78,6 +80,17 @@ class FinishedAnime(Resource):
             anime_name=data['anime_name']
         )
         new_anime_viewed.save()
+
+        info_anime = RequestInfoAnime(data['anime_name'])
+        anime_data = info_anime.get()
+        anime = Anime(
+            canonical_title=anime_data['canonical_title'],
+            synopsis=anime_data['synopsis'],
+            rating=anime_data['rating'],
+            image=anime_data['image'],
+            anime_viewed_id=new_anime_viewed.id
+        )
+        anime.save()
 
         return make_response(jsonify(new_anime_viewed.to_dict()), 201)
 
@@ -207,7 +220,7 @@ class FinishedAnimeId(Resource):
                 400:
                   description: The specified anime viewed ID is invalid. Is not a number.
                 404:
-                  description: The anime viewed with the ID {finished_anime_id} was not found.
+                  description: The anime viewed with the ID {anime_viewed_id} was not found.
         """
         if isinstance(anime_viewed_id, int):
             anime_viewed = AnimeViewed.query.filter_by(id=anime_viewed_id).first()
