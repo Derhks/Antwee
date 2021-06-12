@@ -1,5 +1,4 @@
 import flask
-import os
 import requests
 
 from settings import URL_ANIMES, URL_MORE_DATA, ERROR_MESSAGE

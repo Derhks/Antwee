@@ -1,5 +1,5 @@
 from flasgger import Swagger
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_restful import Api
 
 
@@ -23,8 +23,16 @@ api.add_resource(AnimeId, '/animes/<int:anime_id>')
 from models.anime import Anime
 
 
-@app.route('/anime-list/', methods=['GET'], strict_slashes=False)
+@app.route('/anime-list/', methods=['GET', 'POST'], strict_slashes=False)
 def anime_list():
+    if request.method == 'POST':
+        anime_name = request.form['name']
+
+        try:
+            app.test_client().post('/api/v1/finished-anime/', json={'anime_name': anime_name})
+        except Exception as Err:
+            raise Err
+
     all_animes = Anime.query.all()
     list_animes = []
 
