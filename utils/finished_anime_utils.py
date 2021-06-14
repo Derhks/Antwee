@@ -1,24 +1,7 @@
 import flask
-import requests
 
 from settings import URL_ANIMES, URL_MORE_DATA, ERROR_MESSAGE
-
-
-def check_boolean_string(string: str) -> bool:
-    if string == 'True':
-        return True
-    else:
-        return False
-
-
-def get(url: str) -> dict:
-    try:
-        response = requests.get(url=url)
-
-    except requests.exceptions.HTTPError as Err:
-        raise Err
-
-    return response.json()
+from utils.utils import get
 
 
 class RequestInfoAnime:

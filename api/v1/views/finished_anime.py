@@ -3,7 +3,8 @@ from flask_restful import reqparse, Resource
 
 from models.anime import Anime
 from models.anime_viewed import AnimeViewed
-from utils.finished_anime_utils import check_boolean_string, RequestInfoAnime
+from utils.finished_anime_utils import RequestInfoAnime
+from utils.utils import check_boolean_string
 
 
 parser = reqparse.RequestParser()
