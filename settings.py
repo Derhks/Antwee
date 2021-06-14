@@ -10,3 +10,4 @@ SQLALCHEMY_TRACK_MODIFICATIONS = check_boolean_string(os.getenv('SQLALCHEMY_TRAC
 URL_ANIMES = os.environ['URL_ANIMES']
 URL_MORE_DATA = os.environ['URL_MORE_DATA']
 ERROR_MESSAGE = os.environ['ERROR_MESSAGE']
+TESTING = check_boolean_string(os.getenv('TESTING'))
