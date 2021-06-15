@@ -12,10 +12,23 @@
 
 ## Development Environment Configuration
 
-Download the files from this repository.
+Download the files from this repository
 
 ```bash
-git clone git@github.com:Derhks/Antwee.git
+git clone https://github.com/Derhks/Antwee.git
+```
+
+Go to the Antwee folder
+
+```bash
+cd Antwee/
+```
+
+Verify that we have installed anaconda, if we do not have it, 
+we must install it
+
+```bash
+conda --version
 ```
 
 Create a virtual environment with Anaconda
@@ -31,7 +44,13 @@ conda activate antwee
 ```
 
 With the virtual environment activated we are going to install 
-the requirements used in the project
+the requirements used in the project, but first let's update pip
+
+```bash
+pip install --upgrade pip
+```
+
+and now the requirements
 
 ```bash
 pip3 install -r requirements.txt
