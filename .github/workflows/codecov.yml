@@ -1,0 +1,31 @@
+name: CodeCov
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      OS: ubuntu-latest
+      PYTHON: '3.8'
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Generate Report
+      env:
+        SQLALCHEMY_DATABASE_URI: 'sqlite:////tmp/test.db'
+        SQLALCHEMY_TRACK_MODIFICATIONS: False
+        URL_ANIMES: 'https://kitsu.io/api/edge/anime'
+        URL_MORE_DATA: 'page[limit]=20&page[offset]=0'
+        ERROR_MESSAGE: 'No hay suficiente información'
+        TESTING: True
+      run: |
+        coverage run -m unittest
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v1
