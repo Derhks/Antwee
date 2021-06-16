@@ -16,3 +16,17 @@ def get(url: str) -> dict:
         raise Err
 
     return response.json()
+
+
+def small_synopsis(text: str) -> str:
+    synopsis = ''
+
+    text_split = text.split(sep='.')
+
+    for idx in range(len(text_split)):
+        if (len(synopsis) + len(text_split[idx])) < 340:
+            synopsis += text_split[idx] + '.'
+        else:
+            break
+
+    return synopsis

@@ -21,6 +21,7 @@ api.add_resource(AnimeId, '/animes/<int:anime_id>')
 
 # Start Test
 from models.anime import Anime
+from utils.utils import small_synopsis
 
 
 @app.route('/anime-list/', methods=['GET', 'POST'], strict_slashes=False)
@@ -37,7 +38,9 @@ def anime_list():
     list_animes = []
 
     for anime in all_animes:
-        list_animes.append(anime.to_dict())
+        dict_anime = anime.to_dict()
+        dict_anime['synopsis'] = small_synopsis(dict_anime['synopsis'])
+        list_animes.append(dict_anime)
 
     return render_template('animes.html', list_animes=list_animes)
 # End Test
