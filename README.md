@@ -3,12 +3,21 @@
 
 ## Table of Content
 
+* [Prerequisites](#prerequisites)
 * [Development Environment Configuration](#development-environment-configuration)
 * [Run development version with docker](#run-development-version-with-docker)
 * [Test the Application](#test-the-application)
 * [Built With](#built-with)
 * [Authors](#authors)
 
+
+## Prerequisites
+
+To execute the project, you will need the following:
+
+* [Python3](https://www.python.org/downloads/)
+* [Anaconda](https://docs.anaconda.com/anaconda/install/index.html)
+* [PostgreSQL](https://www.postgresql.org/download/)
 
 ## Development Environment Configuration
 
