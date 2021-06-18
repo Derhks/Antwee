@@ -1,5 +1,5 @@
 # Antwee
-[![codecov](https://codecov.io/gh/Derhks/Antwee/branch/master/graph/badge.svg?token=meBTrDeM4Z)](https://codecov.io/gh/Derhks/Antwee)
+[![codecov](https://codecov.io/gh/Derhks/Antwee/branch/main/graph/badge.svg?token=meBTrDeM4Z)](https://codecov.io/gh/Derhks/Antwee)
 
 ## Table of Content
 
